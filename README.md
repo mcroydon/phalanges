@@ -57,6 +57,10 @@ You should now be able to use a finger client to query phalanges:
     mcroydon                Matt Croydon        
     Plan:
     Implement archaic protocols.
+    
+    $ finger unknown@127.0.0.1
+    [127.0.0.1]
+    The user unknown was not found.
 
 ## Monitoring
 

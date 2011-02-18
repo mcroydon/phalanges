@@ -16,6 +16,8 @@ Phalanges uses [simple-build-tool](http://code.google.com/p/simple-build-tool/) 
 * [Netty](http://www.jboss.org/netty) 3.2.4Final
 * [Configgy](https://github.com/twitter/configgy) 2.0.2
 * [Ostrich](https://github.com/twitter/ostrich) 3.0.4
+* [Specs](http://code.google.com/p/specs/) 1.6.7
+* [Mockito](http://mockito.org/) 1.8.5
 
 ## Running phalanges
 
@@ -66,6 +68,12 @@ You should now be able to use a finger client to query phalanges:
 
 Phalanges logs its actions to `logs/phalanges.log` by default.  It also keeps track of the number of indexes and
 users served since last reboot.  This information can be found at `http://127.0.0.1:9999/report/` by default.
+
+## Testing
+
+You can execute [specs](http://code.google.com/p/specs/) tests with sbt:
+
+    $ sbt clean update compile test
 
 ## To Do
 

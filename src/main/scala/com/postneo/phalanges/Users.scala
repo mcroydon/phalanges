@@ -39,7 +39,7 @@ object Users {
     }
     
     def render_not_found(username: String) = {
-        "The user " + username + " was not found."
+        "The user " + username + " was not found." + Util.CRLF
     }
 
 }

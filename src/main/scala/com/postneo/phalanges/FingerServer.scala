@@ -41,8 +41,7 @@ object FingerServer extends Service {
     def start(config: ConfigMap) {
         ServiceTracker.register(this)
         ServiceTracker.startAdmin(Some(new AdminHttpService(config("admin_port").toInt, 1000, runtime)))
-
-
+        
         val executor = Executors.newCachedThreadPool()
         val factory = new NioServerSocketChannelFactory(executor, executor)
         val bootstrap = new ServerBootstrap(factory)

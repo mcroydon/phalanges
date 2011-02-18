@@ -79,4 +79,3 @@ You can execute [specs](http://code.google.com/p/specs/) tests with sbt:
 
 * Load user list from disk or datastore.
 * Figure out how to use local configs and get rid of `/etc/unknown.conf`.
-* Test with [specs](http://code.google.com/p/specs/).

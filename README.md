@@ -19,7 +19,7 @@ Phalanges uses [simple-build-tool](http://code.google.com/p/simple-build-tool/) 
 * [Specs](http://code.google.com/p/specs/) 1.6.7
 * [Mockito](http://mockito.org/) 1.8.5
 
-## Running phalanges
+## Configuring and running phalanges
 
 First, update external dependencies and compile:
 
@@ -29,6 +29,8 @@ Then edit and/or copy configuration files to where phalanges expects them to be:
 
     $ sudo cp config/phalanges.conf /etc
     $ sudo touch /etc/unknown.conf
+
+User information is stored and loaded from `config/users.json` by default.
 
 By default, phalanges runs on 127.0.0.1 port 79.  Because of this, you must run phalanges with sudo or as root:
 
@@ -47,12 +49,8 @@ You should now be able to use a finger client to query phalanges:
     $ finger @127.0.0.1
     [127.0.0.1]
     Login                   Name                
-    mcroydon                Matt Croydon
-    
-    $ finger mcroydon@127.0.0.1
-    [127.0.0.1]
     mcroydon                Matt Croydon        
-    Implement archaic protocols.
+    robot                   A. Robot
     
     $ finger mcroydon@127.0.0.1
     [127.0.0.1]
@@ -73,7 +71,7 @@ users served since last reboot.  This information can be found at `http://127.0.
 
 You can execute [specs](http://code.google.com/p/specs/) tests with sbt:
 
-    $ sbt clean update compile test
+    $ sbt clean update test
 
 ## To Do
 

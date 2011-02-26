@@ -30,7 +30,7 @@ Then edit and/or copy configuration files to where phalanges expects them to be:
     $ sudo cp config/phalanges.conf /etc
     $ sudo touch /etc/unknown.conf
 
-User information is stored and loaded from `config/users.json` by default.
+User information is stored and loaded from `config/user_map.json` by default.
 
 By default, phalanges runs on 127.0.0.1 port 79.  Because of this, you must run phalanges with sudo or as root:
 
@@ -75,5 +75,6 @@ You can execute [specs](http://code.google.com/p/specs/) tests with sbt:
 
 ## To Do
 
+* Make storage backend configurable and create additional storage backends.
 * Load user list from disk or datastore.
 * Figure out how to use local configs and get rid of `/etc/unknown.conf`.

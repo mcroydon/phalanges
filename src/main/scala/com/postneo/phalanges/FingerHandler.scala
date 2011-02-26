@@ -3,15 +3,14 @@ package phalanges
 
 import com.twitter.stats.Stats
 
-import net.lag.configgy.Configgy
+import net.lag.configgy.ConfigMap
 import net.lag.logging.Logger
 
 import org.jboss.netty.buffer.ChannelBuffer
 import org.jboss.netty.channel.{ChannelHandlerContext, ExceptionEvent, MessageEvent, SimpleChannelUpstreamHandler}
 
-class FingerHandler extends SimpleChannelUpstreamHandler {
+class FingerHandler(config: ConfigMap) extends SimpleChannelUpstreamHandler {
     
-    private val config = Configgy.config
     private val log = Logger.get(getClass.getName)
 
     override def messageReceived(context: ChannelHandlerContext, e: MessageEvent): Unit = {

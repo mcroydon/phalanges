@@ -1,6 +1,8 @@
 package com.postneo
 package phalanges
 
+import net.lag.configgy.ConfigMap
+
 import org.specs.Specification
 import org.specs.mock.Mockito
 import org.mockito.Matchers._
@@ -12,6 +14,7 @@ object FingerHandlerSpec extends Specification with Mockito {
     val mockChannel = mock[Channel]
     mockChannel.write(anyString()) returns mockChannelFuture
     val mockChannelHandlerContext = mock[ChannelHandlerContext]
+    val mockConfigMap = mock[ConfigMap]
     
     def mockMessageEventFactory(str: String) = {
         val mockMessageEvent = mock[MessageEvent]
@@ -23,35 +26,35 @@ object FingerHandlerSpec extends Specification with Mockito {
     "FingerHandler" should {
         "write to a channel" in {
             val mockMessageEvent = mockMessageEventFactory(Util.CRLF)
-            val handler = new FingerHandler
+            val handler = new FingerHandler(mockConfigMap)
             handler.messageReceived(mockChannelHandlerContext, mockMessageEvent)
             there was one(mockChannel).write(anyString())
         }
         
         "strip whitespace around usernames before lookup" in {
             val mockMessageEvent = mockMessageEventFactory("  mcroydon  " + Util.CRLF)
-            val handler = new FingerHandler
+            val handler = new FingerHandler(mockConfigMap)
             handler.messageReceived(mockChannelHandlerContext, mockMessageEvent)
             there was one(mockChannel).write(handler.user("mcroydon"))
         }
         
         "properly routes index requests" in {
             val mockMessageEvent = mockMessageEventFactory(Util.CRLF)
-            val handler = new FingerHandler
+            val handler = new FingerHandler(mockConfigMap)
             handler.messageReceived(mockChannelHandlerContext, mockMessageEvent)
             there was one(mockChannel).write(handler.index())
         }
         
         "properly routes known user requests" in {
             val mockMessageEvent = mockMessageEventFactory("mcroydon" + Util.CRLF)
-            val handler = new FingerHandler
+            val handler = new FingerHandler(mockConfigMap)
             handler.messageReceived(mockChannelHandlerContext, mockMessageEvent)
             there was one(mockChannel).write(handler.user("mcroydon"))
         }
         
         "properly routes unknown user requests" in {
             val mockMessageEvent = mockMessageEventFactory("unknown" + Util.CRLF)
-            val handler = new FingerHandler
+            val handler = new FingerHandler(mockConfigMap)
             handler.messageReceived(mockChannelHandlerContext, mockMessageEvent)
             there was one(mockChannel).write(handler.user("unknown"))
         }

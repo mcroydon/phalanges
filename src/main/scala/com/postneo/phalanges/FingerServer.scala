@@ -45,7 +45,7 @@ object FingerServer extends Service {
         val executor = Executors.newCachedThreadPool()
         val factory = new NioServerSocketChannelFactory(executor, executor)
         val bootstrap = new ServerBootstrap(factory)
-        val handler = new FingerHandler()
+        val handler = new FingerHandler(config)
         val pipeline = bootstrap.getPipeline()
         // Encode end decode messages to ASCII
         pipeline.addLast("encoder", new StringEncoder(CharsetUtil.US_ASCII))

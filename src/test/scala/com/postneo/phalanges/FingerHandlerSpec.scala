@@ -15,6 +15,7 @@ object FingerHandlerSpec extends Specification with Mockito {
     mockChannel.write(anyString()) returns mockChannelFuture
     val mockChannelHandlerContext = mock[ChannelHandlerContext]
     val mockConfigMap = mock[ConfigMap]
+    mockConfigMap.getString("users_json", "config/user_map.json") returns "config/user_map.json"
     
     def mockMessageEventFactory(str: String) = {
         val mockMessageEvent = mock[MessageEvent]

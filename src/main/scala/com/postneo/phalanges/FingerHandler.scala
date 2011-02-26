@@ -1,6 +1,8 @@
 package com.postneo
 package phalanges
 
+import phalanges.storage.InMemoryUserStore
+
 import com.twitter.stats.Stats
 
 import net.lag.configgy.ConfigMap
@@ -12,6 +14,9 @@ import org.jboss.netty.channel.{ChannelHandlerContext, ExceptionEvent, MessageEv
 class FingerHandler(config: ConfigMap) extends SimpleChannelUpstreamHandler {
     
     private val log = Logger.get(getClass.getName)
+    
+    private val storage = new InMemoryUserStore
+    storage.loadUsersFromJSON(config.getString("users_json", "config/user_map.json"))
 
     override def messageReceived(context: ChannelHandlerContext, e: MessageEvent): Unit = {
         val channel = e.getChannel()
@@ -34,13 +39,21 @@ class FingerHandler(config: ConfigMap) extends SimpleChannelUpstreamHandler {
     def index() = {
         log.debug("Index requested.")
         Stats.incr("indexes_served")
-        Users.index()
+        var response = Util.pad("Login") + Util.TAB + Util.pad("Name") + Util.CRLF
+        for (u <- storage.getAllUsers) {
+            response +=  u._2.to_index_string()
+        }
+        response
     }
     
     def user(username: String) = {
         log.debug("User " + username + " requested.")
         Stats.incr("users_served")
-        Users.user(username)
+        val user = storage.getUser(username)
+        user match {
+            case None => "The user " + username + " was not found."
+            case Some(u) => u.to_detail_string
+        }
     }
     
     def error() = {

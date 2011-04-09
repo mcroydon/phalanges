@@ -67,6 +67,27 @@ You should now be able to use a finger client to query phalanges:
 Phalanges logs its actions to `logs/phalanges.log` by default.  It also keeps track of the number of indexes and
 users served since last reboot.  This information can be found at `http://127.0.0.1:9999/report/` by default.
 
+## Metrics
+
+Phalanges uses [Metrics](https://github.com/codahale/metrics) to instrument usage.  There are currently meters for
+index and user requests served::
+
+    4/9/11 4:33:31 PM ==============================================================
+    com.postneo.phalanges.FingerHandler:
+      indexes:
+                 count = 9
+             mean rate = 0.30 served/s
+         1-minute rate = 0.00 served/s
+         5-minute rate = 0.50 served/s
+        15-minute rate = 0.80 served/s
+
+      users:
+                 count = 3
+             mean rate = 0.10 served/s
+         1-minute rate = 0.00 served/s
+         5-minute rate = 0.08 served/s
+        15-minute rate = 0.03 served/s
+
 ## Testing
 
 You can execute [specs](http://code.google.com/p/specs/) tests with sbt:

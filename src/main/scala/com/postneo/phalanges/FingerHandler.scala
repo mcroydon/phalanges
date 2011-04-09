@@ -3,8 +3,6 @@ package phalanges
 
 import phalanges.storage.InMemoryUserStore
 
-import com.twitter.stats.Stats
-
 import net.lag.configgy.ConfigMap
 import net.lag.logging.Logger
 
@@ -38,7 +36,6 @@ class FingerHandler(config: ConfigMap) extends SimpleChannelUpstreamHandler {
 
     def index() = {
         log.debug("Index requested.")
-        Stats.incr("indexes_served")
         var response = Util.pad("Login") + Util.TAB + Util.pad("Name") + Util.CRLF
         for (u <- storage.getAllUsers) {
             response +=  u._2.to_index_string()
@@ -48,7 +45,6 @@ class FingerHandler(config: ConfigMap) extends SimpleChannelUpstreamHandler {
     
     def user(username: String) = {
         log.debug("User " + username + " requested.")
-        Stats.incr("users_served")
         val user = storage.getUser(username)
         user match {
             case None => "The user " + username + " was not found."

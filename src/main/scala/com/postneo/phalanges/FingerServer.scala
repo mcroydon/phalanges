@@ -7,8 +7,6 @@ package com.postneo
  */
 package phalanges
 
-import com.twitter.admin.{AdminHttpService, RuntimeEnvironment, Service, ServiceTracker}
-
 import java.net.InetSocketAddress
 import java.util.concurrent.{CountDownLatch, Executors}
 
@@ -24,11 +22,10 @@ import org.jboss.netty.util.CharsetUtil
 /**
  * A Finger daemon.
  */
-object FingerServer extends Service {
+object FingerServer {
 
     private val log = Logger.get(getClass.getName)
     private val deathSwitch = new CountDownLatch(1)
-    private val runtime = new RuntimeEnvironment(getClass)
     
     Configgy.configure("config/phalanges.conf")
     val config = Configgy.config
@@ -39,9 +36,6 @@ object FingerServer extends Service {
     }
     
     def start(config: ConfigMap) {
-        ServiceTracker.register(this)
-        ServiceTracker.startAdmin(Some(new AdminHttpService(config("admin_port").toInt, 1000, runtime)))
-        
         val executor = Executors.newCachedThreadPool()
         val factory = new NioServerSocketChannelFactory(executor, executor)
         val bootstrap = new ServerBootstrap(factory)

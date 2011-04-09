@@ -15,7 +15,6 @@ Phalanges uses [simple-build-tool](http://code.google.com/p/simple-build-tool/) 
 * [simple-build-tool](http://code.google.com/p/simple-build-tool/) 0.7.4
 * [Netty](http://www.jboss.org/netty) 3.2.4Final
 * [Configgy](https://github.com/twitter/configgy) 2.0.2
-* [Ostrich](https://github.com/twitter/ostrich) 3.0.4
 * [Specs](http://code.google.com/p/specs/) 1.6.7
 * [Mockito](http://mockito.org/) 1.8.5
 

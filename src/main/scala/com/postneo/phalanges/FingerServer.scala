@@ -7,8 +7,10 @@ package com.postneo
  */
 package phalanges
 
+import com.yammer.metrics.Metrics
+
 import java.net.InetSocketAddress
-import java.util.concurrent.{CountDownLatch, Executors}
+import java.util.concurrent.{CountDownLatch, Executors, TimeUnit}
 
 import net.lag.configgy.{Configgy, ConfigMap}
 import net.lag.logging.Logger
@@ -36,6 +38,12 @@ object FingerServer {
     }
     
     def start(config: ConfigMap) {
+        val enable_console = config.getBool("metrics.enable_console", false)
+        
+        if (enable_console) {
+            Metrics.enableConsoleReporting(config.getInt("metrics.console_interval", 30), TimeUnit.SECONDS)
+        }
+        
         val executor = Executors.newCachedThreadPool()
         val factory = new NioServerSocketChannelFactory(executor, executor)
         val bootstrap = new ServerBootstrap(factory)

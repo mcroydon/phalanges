@@ -3,7 +3,7 @@ package com.postneo
  * An experimental implementation of the original finger protocol (RFC 742) with Netty and Scala.
  *
  * @author Matt Croydon
- * @version 0.2.0-SNAPSHOT
+ * @version 0.3.0-SNAPSHOT
  */
 package phalanges
 

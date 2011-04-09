@@ -42,7 +42,7 @@ class FingerHandler(config: ConfigMap) extends SimpleChannelUpstreamHandler with
 
     def index() = {
         log.debug("Index requested.")
-        indexesMeter.mark(1)
+        indexesMeter.mark()
         var response = Util.pad("Login") + Util.TAB + Util.pad("Name") + Util.CRLF
         for (u <- storage.getAllUsers) {
             response +=  u._2.to_index_string()
@@ -52,7 +52,7 @@ class FingerHandler(config: ConfigMap) extends SimpleChannelUpstreamHandler with
     
     def user(username: String) = {
         log.debug("User " + username + " requested.")
-        usersMeter.mark(1)
+        usersMeter.mark()
         val user = storage.getUser(username)
         user match {
             case None => "The user " + username + " was not found."

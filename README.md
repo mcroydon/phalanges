@@ -17,6 +17,7 @@ Phalanges uses [simple-build-tool](http://code.google.com/p/simple-build-tool/) 
 * [Configgy](https://github.com/twitter/configgy) 2.0.2
 * [Specs](http://code.google.com/p/specs/) 1.6.7
 * [Mockito](http://mockito.org/) 1.8.5
+* [Metrics](https://github.com/codahale/metrics) 2.0.0-BETA10
 
 ## Configuring and running phalanges
 

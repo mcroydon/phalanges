@@ -89,7 +89,7 @@ index and user requests served::
         15-minute rate = 0.03 served/s
 
 If you would like to monitor your metrics via JConsole, make sure you use ``sudo jconsole`` so that you're running
-JCsonole as the same user as your app.
+JConsole as the same user as your app.
 
 ## Testing
 

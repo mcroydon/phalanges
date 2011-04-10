@@ -88,6 +88,9 @@ index and user requests served::
          5-minute rate = 0.08 served/s
         15-minute rate = 0.03 served/s
 
+If you would like to monitor your metrics via JConsole, make sure you use ``sudo jconsole`` so that you're running
+JCsonole as the same user as your app.
+
 ## Testing
 
 You can execute [specs](http://code.google.com/p/specs/) tests with sbt:
